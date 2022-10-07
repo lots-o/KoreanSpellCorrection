@@ -46,7 +46,7 @@ class CorpusKoreanJsonParser:
 @logged
 class GrammarCorrectionJsonParser(CorpusKoreanJsonParser):
     """
-    국립 국어원 맞춤법 교정 말뭉치 v1.0 에서 utterance 또는 paragraph 정보만 파싱
+    국립 국어원 맞춤법 교정 말뭉치 v1.0 (2021년) 에서 utterance 또는 paragraph 정보만 파싱
     - NIKL_SC_2021_v1.0
         - MXSC2102112091.json  -> utterance
         - EXSC2102112091.json  -> paragraph
@@ -72,13 +72,13 @@ class GrammarCorrectionJsonParser(CorpusKoreanJsonParser):
                     count += 1
 
             writer.close()
-            self.__log.info(f"Parsing data :: {fname}:: |data| = {count}")
+            self.__log.info(f"Parsing data :: {fname}:: |data| = {count:,}")
 
 
 @logged
 class NewsPaperJsonParser(CorpusKoreanJsonParser):
     """
-    국립 국어원 신문 말뭉치 v2.0 에서 paragraph 정보만 파싱
+    국립 국어원 신문 말뭉치 v2.0 (2009년 ~ 2018년)에서 paragraph 정보만 파싱
     - NIKL_NEWSPAPER_v2.0
         - NIRW1900000001.json ~ NIRW1900000030.json
         - NLRW1900000001.json ~ NLRW1900000161.json
@@ -106,7 +106,7 @@ class NewsPaperJsonParser(CorpusKoreanJsonParser):
                     writer.write("\n")
                     count += 1
             writer.close()
-            self.__log.info(f"Parsing data :: {fname}:: |data| = {count}")
+            self.__log.info(f"Parsing data :: {fname}:: |data| = {count:,}")
 
 
 if __name__ == "__main__":
