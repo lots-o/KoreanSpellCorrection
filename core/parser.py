@@ -9,7 +9,7 @@ from dataclass import GrammarCorrectionColumn, NewsPaperColumn
 
 
 @logged
-class CorpusKoreanJsonParser:
+class BaseLoader:
     def __init__(self, input_dir: str, output_dir: str) -> None:
         self.input_dir = input_dir
         self._create_output_dir(output_dir)
@@ -17,7 +17,7 @@ class CorpusKoreanJsonParser:
 
     def _load_data(self) -> None:
 
-        self.__log.info(f"Parsing input dir:: {self.input_dir}")
+        self.__log.info(f"Input dir:: {self.input_dir}")
         input_paths = os.path.join(self.input_dir, "*.json")
         self.__log.info(f"Load data :: {input_paths}")
         self.fname2file = dict()
@@ -29,7 +29,7 @@ class CorpusKoreanJsonParser:
     def _create_output_dir(self, output_dir) -> None:
         self.output_dir = os.path.join(output_dir, os.path.split(self.input_dir)[1])
         if not os.path.exists(self.output_dir):
-            self.__log.info(f"Create parsing output dir :: {self.output_dir }")
+            self.__log.info(f"Create output dir :: {self.output_dir }")
             os.makedirs(self.output_dir)
         else:
             self.__log.info(f"Output dir exists :: {self.output_dir }")
@@ -44,7 +44,7 @@ class CorpusKoreanJsonParser:
 
 
 @logged
-class GrammarCorrectionJsonParser(CorpusKoreanJsonParser):
+class GrammarCorrectionJsonParser(BaseLoader):
     """
     국립 국어원 맞춤법 교정 말뭉치 v1.0 (2021년) 에서 utterance 또는 paragraph 정보만 파싱
     - NIKL_SC_2021_v1.0
@@ -76,7 +76,7 @@ class GrammarCorrectionJsonParser(CorpusKoreanJsonParser):
 
 
 @logged
-class NewsPaperJsonParser(CorpusKoreanJsonParser):
+class NewsPaperJsonParser(BaseLoader):
     """
     국립 국어원 신문 말뭉치 v2.0 (2009년 ~ 2018년)에서 paragraph 정보만 파싱
     - NIKL_NEWSPAPER_v2.0
